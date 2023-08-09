@@ -1,5 +1,6 @@
 
 # this is the "web_app/routes/unemployment_routes.py" file...
+
 from flask import Blueprint, request, render_template, redirect, flash
 
 from app.unemployment import fetch_unemployment_data, format_pct
@@ -17,7 +18,7 @@ def unemployment_dashboard():
         latest_rate_pct = format_pct(float(latest["value"]))
         latest_date = latest["date"]
 
-        #flash("Fetched Latest Unemployment Data!", "success")
+        flash("Fetched Latest Unemployment Data!", "success")
         return render_template("unemployment_dashboard.html",
             latest_rate_pct=latest_rate_pct,
             latest_date=latest_date,
@@ -26,7 +27,7 @@ def unemployment_dashboard():
     except Exception as err:
         print('OOPS', err)
 
-        #flash("Unemployment Data Error. Please try again!", "danger")
+        flash("Unemployment Data Error. Please try again!", "danger")
         return redirect("/")
 
 #
